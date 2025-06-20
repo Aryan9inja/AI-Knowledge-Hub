@@ -1,0 +1,1 @@
+This project is based on the foundation of web dev and AI integration to further enhance app capabilities
