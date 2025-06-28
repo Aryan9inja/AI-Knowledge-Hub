@@ -17,6 +17,7 @@ ai-knowledge-hub/
 │   │   ├── middlewares/
 │   │   ├── models/
 │   │   ├── routes/
+│   │   ├── services/
 │   │   ├── utils/
 │   │   ├── app.js
 │   │   ├── constants.js
@@ -36,7 +37,7 @@ ai-knowledge-hub/
 - ✅ Notes: create, fetch, update, delete
 - ✅ Tasks: create, fetch, update, delete
 - ✅ Subtasks: fully integrated with task-based linkage
-- 🧠 AI Integration (planned using Mistral: Mistral 7B Instruct )
+- 🧠 AI Integration (done using Mistral: Mistral 7B Instruct )
 - 📎 Modular folder structure with clean code practices
 
 ---
@@ -82,13 +83,13 @@ ai-knowledge-hub/
 
 ### ✅ Tasks
 
-| Method | Route                  | Description               |
-| ------ | ---------------------- | ------------------------- |
-| POST   | `/tasks/`              | Create a new task         |
-| GET    | `/tasks/`              | Fetch all tasks           |
-| GET    | `/tasks/:id`           | Fetch a specific task     |
-| POST   | `/tasks/:id`           | Update a task             |
-| DELETE | `/tasks/:id`           | Delete a task             |
+| Method | Route                        | Description               |
+| ------ | ---------------------------- | ------------------------- |
+| POST   | `/tasks/`                    | Create a new task         |
+| GET    | `/tasks/`                    | Fetch all tasks           |
+| GET    | `/tasks/:id`                 | Fetch a specific task     |
+| POST   | `/tasks/:id`                 | Update a task             |
+| DELETE | `/tasks/:id`                 | Delete a task             |
 | GET    | `tasks/tasks-with-subtasks/` | Fetch tasks with subtasks |
 
 ---
@@ -102,7 +103,12 @@ ai-knowledge-hub/
 | POST   | `/tasks/:id/subtask/:subtaskId` | Update specific subtask   |
 | DELETE | `/tasks/:id/subtask/:subtaskId` | Delete specific subtask   |
 
-> 🧠 AI endpoints for summarization will be added soon.
+### 🧠 AI-Powered Summarization
+
+| Method | Route                         | Description                                            |
+| ------ | ----------------------------- | ------------------------------------------------------ |
+| GET    | `/ai/notes/:noteId/summarize` | Summarize a specific note                              |
+| GET    | `/ai/tasks/:id/summarize`     | Summarize a specific task (where `:id` is the task ID) |
 
 ---
 
@@ -112,7 +118,7 @@ ai-knowledge-hub/
 - **Backend:** Node.js, Express.js
 - **Database:** MongoDB (Mongoose ODM)
 - **Auth:** JWT, Refresh Tokens, HTTP-only Cookies
-- **AI Integration:** Mistral: Mistral 7B Instruct (planned)
+- **AI Integration:** Mistral: Mistral 7B Instruct
 - **Dev Tools:** Postman, dotenv, ES6 modules
 
 ---
@@ -145,11 +151,12 @@ ACCESS_TOKEN_SECRET=your-access-token-secret
 ACCESS_TOKEN_EXPIRY=preffered-expiry-for-access-token
 REFRESH_TOKEN_SECRET=your-refresh-token-secret
 REFRESH_TOKEN_EXPIRY=preffered-expiry-for-refresh-token
+OPEN_ROUTER_API_KEY=your-api-key-for-open-router
 ```
 
 ## 📌 Todo (Next Steps)
 
-⬜ AI Integration with Mistral: Mistral 7B Instruct for summarizing notes/tasks  
+✅ AI Integration with Mistral: Mistral 7B Instruct for summarizing notes/tasks  
 ✅ Subtask APIs (create, update, delete)  
 ⬜ React frontend with protected routes and UI  
 ⬜ Add validation & rate-limiting middleware  
