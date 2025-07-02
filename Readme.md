@@ -1,4 +1,4 @@
-# 🧠 AI Knowledge Hub
+# 🧠 Synote
 
 A full-stack **note and task management** web app powered by **Node.js**, **MongoDB**, **JWT Authentication**, and future **AI integration** (e.g., GPT-4o). Designed to be fast, secure, and extendable — with AI-assisted summaries and productivity tools.
 
@@ -7,7 +7,7 @@ A full-stack **note and task management** web app powered by **Node.js**, **Mong
 ## 📁 Project Structure Till Now
 
 ```
-ai-knowledge-hub/
+synote/
 ├── client/                # React frontend
 │   └── .gitkeep           # Until frontend is started
 ├── server/                # Node.js backend
