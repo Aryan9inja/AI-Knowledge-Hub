@@ -8,9 +8,18 @@ A full-stack **note and task management** web app powered by **Node.js**, **Mong
 
 ```
 synote/
-├── client/                # React frontend
-│   └── .gitkeep           # Until frontend is started
-├── server/                # Node.js backend
+├── client/                # React frontend using vite
+│   ├── src/
+│   │   ├── assets/
+│   │   ├── components/
+│   │   ├── lib/
+│   │   ├── pages/
+│   │   ├── services/
+│   │   ├── store/
+│   │   ├── App.jsx
+│   │   ├── index.css
+│   │   └── main.jsx
+├── server/                # Node.js backend using express
 │   ├──source
 │   │   ├── controllers/
 │   │   ├── db/
@@ -22,7 +31,6 @@ synote/
 │   │   ├── app.js
 │   │   ├── constants.js
 │   │   └── server.js
-├── config/                # env configs
 └── README.md
 ```
 
