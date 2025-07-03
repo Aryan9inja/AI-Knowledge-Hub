@@ -1,33 +1,34 @@
 # 🧠 Synote
 
-A full-stack **note and task management** web app powered by **Node.js**, **MongoDB**, **JWT Authentication**, and future **AI integration** (e.g., GPT-4o). Designed to be fast, secure, and extendable — with AI-assisted summaries and productivity tools.
+A full-stack **note and task management** web app powered by **Node.js**, **MongoDB**, **JWT Authentication**, and **AI integration** (Mistral 7B Instruct). Designed to be fast, secure, and extendable — with AI-assisted summaries and productivity tools.
 
 ---
 
-## 📁 Project Structure Till Now
+## 📁 Project Structure
 
 ```
 synote/
-├── client/                # React frontend using vite
+├── client/                # React frontend using Vite
+│   ├── public/            # Public assets (e.g., avatar SVGs)
 │   ├── src/
-│   │   ├── assets/
-│   │   ├── components/
-│   │   ├── lib/
-│   │   ├── pages/
-│   │   ├── services/
-│   │   ├── store/
+│   │   ├── assets/         # Static assets
+│   │   ├── components/     # Reusable UI components
+│   │   ├── lib/            # Utility functions
+│   │   ├── pages/          # Route pages
+│   │   ├── services/       # API service functions
+│   │   ├── store/          # Redux slices
 │   │   ├── App.jsx
 │   │   ├── index.css
 │   │   └── main.jsx
-├── server/                # Node.js backend using express
-│   ├──source
-│   │   ├── controllers/
-│   │   ├── db/
-│   │   ├── middlewares/
-│   │   ├── models/
-│   │   ├── routes/
-│   │   ├── services/
-│   │   ├── utils/
+├── server/                # Node.js backend using Express
+│   ├── source/
+│   │   ├── controllers/    # Route logic
+│   │   ├── db/             # DB connection setup
+│   │   ├── middlewares/    # Auth & error middlewares
+│   │   ├── models/         # Mongoose models
+│   │   ├── routes/         # Express routes
+│   │   ├── services/       # Token / AI / utility services
+│   │   ├── utils/          # Misc helpers
 │   │   ├── app.js
 │   │   ├── constants.js
 │   │   └── server.js
@@ -38,26 +39,29 @@ synote/
 
 ## 🚀 Features
 
-- ✅ User registration & login (with JWT)
-- ✅ Access & refresh token generation
-- ✅ Secure cookie-based auth (`httpOnly`, `secure`)
-- ✅ Protected API routes (`verifyJWT` middleware)
-- ✅ Notes: create, fetch, update, delete
-- ✅ Tasks: create, fetch, update, delete
-- ✅ Subtasks: fully integrated with task-based linkage
-- 🧠 AI Integration (done using Mistral: Mistral 7B Instruct )
-- 📎 Modular folder structure with clean code practices
+* ✅ User registration & login (JWT-based)
+* ✅ Secure cookies (`httpOnly`, `secure`) for access/refresh tokens
+* ✅ Protected API routes with `verifyJWT` middleware
+* ✅ Notes: create, fetch, update, delete
+* ✅ Tasks: create, fetch, update, delete
+* ✅ Subtasks: fully integrated with task structure
+* ✅ Avatar picker system (SVG-based avatars)
+* ✅ AI-powered summarization (Mistral 7B Instruct via OpenRouter)
+* ✅ Redux state management for auth & user
+* ✅ Tailwind CSS for styling
+* ✅ React Router DOM for SPA routing
+* 📎 Modular code with clean practices
 
 ---
 
 ## 🔐 Auth Flow
 
-- Access Token (short-lived) stored in secure cookies
-- Refresh Token (longer-lived) saved in DB and cookie
-- `verifyJWT` middleware protects all sensitive routes
-- `/me` route to fetch currently logged-in user
-- `/refresh-tokens` endpoint to rotate tokens
-- `/logout` endpoint clears session
+* Access Token (short-lived) in secure cookies
+* Refresh Token (longer-lived) stored in DB + cookie
+* `verifyJWT` middleware protects routes
+* `/me` returns current user info
+* `/refresh-tokens` rotates tokens
+* `/logout` ends session
 
 ---
 
@@ -65,15 +69,16 @@ synote/
 
 > All routes are prefixed with `/api/v1/`
 
-### 🧑‍💻 Auth (Prefixed with /users)
+### 👨‍💻 Auth (`/users`)
 
-| Method | Route             | Description         |
-| ------ | ----------------- | ------------------- |
-| POST   | `/register`       | Register new user   |
-| POST   | `/login`          | Login user          |
-| GET    | `/me`             | Get current user    |
-| POST   | `/logout`         | Logout user         |
-| POST   | `/refresh-tokens` | Rotate access token |
+| Method | Route             | Description                  |
+| ------ | ----------------- | ---------------------------- |
+| POST   | `/register`       | Register new user            |
+| POST   | `/login`          | Login user                   |
+| GET    | `/me`             | Get current user             |
+| POST   | `/logout`         | Logout user                  |
+| POST   | `/refresh-tokens` | Rotate access token          |
+| PATCH  | `/me`             | Update current user (avatar) |
 
 ---
 
@@ -91,18 +96,18 @@ synote/
 
 ### ✅ Tasks
 
-| Method | Route                        | Description               |
-| ------ | ---------------------------- | ------------------------- |
-| POST   | `/tasks/`                    | Create a new task         |
-| GET    | `/tasks/`                    | Fetch all tasks           |
-| GET    | `/tasks/:id`                 | Fetch a specific task     |
-| POST   | `/tasks/:id`                 | Update a task             |
-| DELETE | `/tasks/:id`                 | Delete a task             |
-| GET    | `tasks/tasks-with-subtasks/` | Fetch tasks with subtasks |
+| Method | Route                         | Description               |
+| ------ | ----------------------------- | ------------------------- |
+| POST   | `/tasks/`                     | Create a new task         |
+| GET    | `/tasks/`                     | Fetch all tasks           |
+| GET    | `/tasks/:id`                  | Fetch a specific task     |
+| POST   | `/tasks/:id`                  | Update a task             |
+| DELETE | `/tasks/:id`                  | Delete a task             |
+| GET    | `/tasks/tasks-with-subtasks/` | Fetch tasks with subtasks |
 
 ---
 
-### 🔁 Subtasks
+### ↻ Subtasks
 
 | Method | Route                           | Description               |
 | ------ | ------------------------------- | ------------------------- |
@@ -111,23 +116,25 @@ synote/
 | POST   | `/tasks/:id/subtask/:subtaskId` | Update specific subtask   |
 | DELETE | `/tasks/:id/subtask/:subtaskId` | Delete specific subtask   |
 
+---
+
 ### 🧠 AI-Powered Summarization
 
-| Method | Route                         | Description                                            |
-| ------ | ----------------------------- | ------------------------------------------------------ |
-| GET    | `/ai/notes/:noteId/summarize` | Summarize a specific note                              |
-| GET    | `/ai/tasks/:id/summarize`     | Summarize a specific task (where `:id` is the task ID) |
+| Method | Route                         | Description               |
+| ------ | ----------------------------- | ------------------------- |
+| GET    | `/ai/notes/:noteId/summarize` | Summarize a specific note |
+| GET    | `/ai/tasks/:id/summarize`     | Summarize a specific task |
 
 ---
 
 ## ⚙️ Tech Stack
 
-- **Frontend:** React, Redux, Tailwind (planned)
-- **Backend:** Node.js, Express.js
-- **Database:** MongoDB (Mongoose ODM)
-- **Auth:** JWT, Refresh Tokens, HTTP-only Cookies
-- **AI Integration:** Mistral: Mistral 7B Instruct
-- **Dev Tools:** Postman, dotenv, ES6 modules
+* **Frontend:** React, Redux Toolkit, Tailwind CSS, React Router DOM
+* **Backend:** Node.js, Express.js
+* **Database:** MongoDB (via Mongoose)
+* **Authentication:** JWT + refresh tokens (secure cookies)
+* **AI:** Mistral 7B Instruct via [OpenRouter API](https://openrouter.ai)
+* **Dev Tools:** Vite, Postman, dotenv, ESLint, Prettier
 
 ---
 
@@ -149,23 +156,32 @@ npm install
 npm run dev
 ```
 
-### 🔐 ENV Configuration (server/.env)
+### 🔐 ENV Configuration (`server/.env`)
 
 ```ini
 PORT=8000
 MONGODB_URI=your-mongo-db-uri
-CORS_ORIGIN=set-for-your-network
+CORS_ORIGIN=http://localhost:5173
 ACCESS_TOKEN_SECRET=your-access-token-secret
-ACCESS_TOKEN_EXPIRY=preffered-expiry-for-access-token
+ACCESS_TOKEN_EXPIRY=15m
 REFRESH_TOKEN_SECRET=your-refresh-token-secret
-REFRESH_TOKEN_EXPIRY=preffered-expiry-for-refresh-token
-OPEN_ROUTER_API_KEY=your-api-key-for-open-router
+REFRESH_TOKEN_EXPIRY=7d
+OPEN_ROUTER_API_KEY=your-openrouter-api-key
 ```
 
-## 📌 Todo (Next Steps)
+### 🌐 ENV Configuration (`client/.env`)
 
-✅ AI Integration with Mistral: Mistral 7B Instruct for summarizing notes/tasks  
-✅ Subtask APIs (create, update, delete)  
-⬜ React frontend with protected routes and UI  
-⬜ Add validation & rate-limiting middleware  
-⬜ Dockerize the backend and frontend (optional)
+```env
+VITE_API_BASE_URL=http://localhost:8000/api/v1
+```
+
+---
+
+## 📌 Todo
+
+* ✅ AI Integration using Mistral 7B via OpenRouter
+* ✅ Subtask APIs (create, update, delete)
+* ✅ Avatar picker UI & backend integration
+* ⬜ Protected routes & full UI in React
+* ⬜ Add validation & rate-limiting middleware
+* ⬜ Dockerize backend and frontend (optional)
