@@ -89,7 +89,7 @@ synote/
 | POST   | `/notes/`    | Create a new note            |
 | GET    | `/notes/`    | Fetch all notes (user-based) |
 | GET    | `/notes/:id` | Fetch a specific note        |
-| POST   | `/notes/:id` | Update a note                |
+| PATCH  | `/notes/:id` | Update a note                |
 | DELETE | `/notes/:id` | Delete a note                |
 
 ---
@@ -101,7 +101,7 @@ synote/
 | POST   | `/tasks/`                     | Create a new task         |
 | GET    | `/tasks/`                     | Fetch all tasks           |
 | GET    | `/tasks/:id`                  | Fetch a specific task     |
-| POST   | `/tasks/:id`                  | Update a task             |
+| PATCH  | `/tasks/:id`                  | Update a task             |
 | DELETE | `/tasks/:id`                  | Delete a task             |
 | GET    | `/tasks/tasks-with-subtasks/` | Fetch tasks with subtasks |
 
@@ -113,7 +113,7 @@ synote/
 | ------ | ------------------------------- | ------------------------- |
 | POST   | `/tasks/:id/subtask`            | Create subtask for task   |
 | GET    | `/tasks/:id/subtask`            | Get all subtasks for task |
-| POST   | `/tasks/:id/subtask/:subtaskId` | Update specific subtask   |
+| PATCH  | `/tasks/:id/subtask/:subtaskId` | Update specific subtask   |
 | DELETE | `/tasks/:id/subtask/:subtaskId` | Delete specific subtask   |
 
 ---
